@@ -1,6 +1,7 @@
 import Info from "../../data/Info.json";
 import TariffItem from "../TariffItem/TariffItem";
 import style from "../Tariff/Tariff.module.sass";
+import { useState } from "react"
 
 export default function Tariff() {
 
@@ -16,10 +17,13 @@ export default function Tariff() {
     }
   }
 
+  const [selectedId, setSelectedId] = useState(null);
+
   return (
     <div className={style.container} >
       {Info.map((item,index)=>(
-        <TariffItem color = {getColor(index)} key={index} {...item}/>
+        <TariffItem color = {getColor(index)} key={index} {...item} isSelected ={item.id === selectedId}
+        handleSelect={() => setSelectedId(item.id)}/>
       ))}
     </div>
   )
